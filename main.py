@@ -1,6 +1,16 @@
+# uvicorn main:app --reload
+# uvicorn main:app
+
+
 from typing import Union
 
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
+from decouple import config
+import openai
+
+# Custom Funtion Imports
 
 app = FastAPI()
 

@@ -35,9 +35,17 @@ allow_methods=["*"],
 allow_headers=["*"]
 )
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+# Check Health
+@app.get("/health")
+def check_health():
+    return {"message": "healthy"}
+
+# # Post bot response
+# # Note: Not playing in brower when using post request
+# @app.post("/post-audio/")
+# async def post_audio(file: UploadFile = File(...)):
+
+#     return
 
 
 @app.get("/items/{item_id}")

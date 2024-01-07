@@ -13,8 +13,27 @@ import openai
 # Custom Funtion Imports
 #
 
+# Initiate App
 app = FastAPI()
 
+
+# CORS - Origins
+origins = [
+    "https://localhost:5173"
+    "https://localhost:5174"
+    "https://localhost:4173"
+    "https://localhost:3174"
+    "https://localhost:3000"
+]
+
+#CORS - Middleware
+app.add_middleware(
+CORSMiddleware,
+allow_origins=origins,
+allow_credentials=True,
+allow_methods=["*"],
+allow_=["*"]
+)
 
 @app.get("/")
 def read_root():

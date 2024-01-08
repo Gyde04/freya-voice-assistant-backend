@@ -1,9 +1,9 @@
 import openai
 from decouple import config
 
-# Retrieve Enviroment Variables
-open.organization = config("OPEN_AI_ORG")
-open.api_key = config("OPEN_AI_KEY")
+# Retrieve Environment Variables
+openai.organization = config("OPEN_AI_ORG")
+openai.api_key = config("OPEN_AI_KEY")
 
 # Open AI - Whisper
 # Convert Audio to Text
@@ -11,8 +11,13 @@ open.api_key = config("OPEN_AI_KEY")
 def convert_audio_to_text(audio_file):
     try:
         transcript = openai.Audio.transcribe("whisper-1", audio_file)
-        message_text = transcript("text")
-        return message_text
+        # Check if the transcript is not None and contains 'text' attribute
+        if transcript and "text" in transcript:
+            message_text = transcript["text"]
+            return message_text
+        else:
+            print("Transcript is empty or missing 'text' attribute")
+            return None
     except Exception as e:
-        print(e)
-        return
+        print(f"Error occurred during audio transcription: {e}")
+        return None
